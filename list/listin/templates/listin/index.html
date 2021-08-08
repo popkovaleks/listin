@@ -1,4 +1,5 @@
-<body>
+{% extends "listin/base.html" %} 
+{% block content %}
     {% if books %} 
         <ul>
             {% for book in books %} 
@@ -6,4 +7,4 @@
             {% endfor %}
         </ul>
     {% endif %}
-</body>
+{% endblock %}

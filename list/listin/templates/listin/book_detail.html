@@ -1,0 +1,10 @@
+{% extends "listin/base.html" %} 
+
+{% block content %} 
+    <h2>{{book.name}} </h2>
+    <p>Author:<a href="#"> {{book.author}}</a></p>
+    <p>Release date:<a href="#"> {{book.release_date}}</a></p>
+    <p>Genre: <a href="#">{{book.genre}}</a></p>
+    <p>Language: <a href="#"> {{book.language}} </a></p>
+    <p>{{book.description}}</p>
+{% endblock %}
