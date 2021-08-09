@@ -7,16 +7,15 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-default">
+            <nav class="navbar navbar-expand-md">
                 <div class="container">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data_toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <button type="button" class="navbar-toggler collapsed" data_toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" aria-controls="bs-example-navbar-collapse-1">
                             <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="{% url 'listin:index' %}">Listin</a>
+                        <div class="collapse navbar-collapse" id="#bs-example-navbar-collapse-1">Label</div>
                     </div>  
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
