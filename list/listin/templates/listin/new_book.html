@@ -1,0 +1,12 @@
+{% extends 'listin/base.html' %} 
+
+{% block content %} 
+<h2>New book</h2>
+<form method="POST" action="{% url 'listin:new_book' %}">
+    {%csrf_token%} 
+    {{ form.name }} <br>
+    {{ form.author }} <a href="#" target="_blank">+ author</a> <br>
+    {{ form.description }}<br>
+    <button type="submit" class="save btn btn-success">Save</button>
+</form>
+{% endblock %}

@@ -1,5 +1,6 @@
 {% extends "listin/base.html" %} 
 {% block content %}
+    <a href="{% url 'listin:new_book' %}" class="btn btn-info">+ New book</a>
     {% if books %} 
         <ul>
             {% for book in books %} 
