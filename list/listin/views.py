@@ -5,7 +5,7 @@ from django.urls import reverse
 
 
 from .models import Book
-from .forms import BookForm
+from .forms import AuthorForm, BookForm
 # Create your views here.
 
 
@@ -30,3 +30,14 @@ def new_book(request):
     else:
         form = BookForm()
     return render(request, 'listin/new_book.html', {'form': form})
+
+def new_author(request):
+    if request.method == 'POST':
+        form = AuthorForm(request.POST)
+        if form.is_valid:
+            author = form.save(commit=False)
+            author.save()
+            return HttpResponseRedirect(reverse('listin:index'))
+    else:
+        form = AuthorForm()
+    return render(request, 'listin/new_author.html', {'form': form})

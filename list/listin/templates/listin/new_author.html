@@ -1,0 +1,13 @@
+{% extends 'listin/base.html' %} 
+
+{% block content %} 
+<h2>New author</h2>
+<form method="POST" action="{% url 'listin:new_author' %}">
+    {%csrf_token%} 
+    <p>First name {{ form.first_name }} </p><br>
+    <p>Last name {{ form.last_name }} </p><br>
+    <p>Date of birth {{ form.date_of_birth }}</p><br>
+    <p>Date of birth {{ form.date_of_death }} </p><br>
+    <button type="submit" class="save btn btn-success">Save</button>
+</form>
+{% endblock %}

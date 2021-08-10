@@ -4,9 +4,9 @@
 <h2>New book</h2>
 <form method="POST" action="{% url 'listin:new_book' %}">
     {%csrf_token%} 
-    {{ form.name }} <br>
-    {{ form.author }} <a href="#" target="_blank">+ author</a> <br>
-    {{ form.description }}<br>
+    <p>Name {{ form.name }}  </p><br>
+    <p>Author {{ form.author }} <a href="{% url 'listin:new_author' %}"  target="_blank">+ author</a> </p><br>
+    <p>Description </p>{{ form.description }} <br>
     <button type="submit" class="save btn btn-success">Save</button>
 </form>
 {% endblock %}
