@@ -6,6 +6,9 @@
     {%csrf_token%} 
     <p>Name {{ form.name }}  </p><br>
     <p>Author {{ form.author }} <a href="{% url 'listin:new_author' %}"  target="_blank">+ author</a> </p><br>
+    <p>Release date {{form.release_date}}</p> <br>
+    <p>Language {{form.language}}</p> <br>
+    <p>Genres {{form.genre}}</p>
     <p>Description </p>{{ form.description }} <br>
     <button type="submit" class="save btn btn-success">Save</button>
 </form>
