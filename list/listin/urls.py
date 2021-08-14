@@ -10,4 +10,6 @@ urlpatterns = [
     path('new_book/', views.new_book, name='new_book'),
     path('new_author/', views.new_author, name='new_author'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('login/', views.login, name='login'),
+    path('register/', views.register, name='register'),
 ]

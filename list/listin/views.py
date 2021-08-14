@@ -1,11 +1,13 @@
+from django.http import request
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 
 
+
 from .models import Book
-from .forms import AuthorForm, BookForm
+from .forms import AuthorForm, BookForm, RegistrationForm
 # Create your views here.
 
 
@@ -41,3 +43,19 @@ def new_author(request):
     else:
         form = AuthorForm()
     return render(request, 'listin/new_author.html', {'form': form})
+
+def login(request):
+    form = LoginForm()
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data['password'])
+            new_user.save()
+            return render(request, 'listin/register_done.html', {'new_user': new_user})
+    else:
+        form = RegistrationForm()
+    return render(request, 'listin/register.html', {'form': form})

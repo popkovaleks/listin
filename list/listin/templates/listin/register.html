@@ -1,0 +1,13 @@
+{% extends "listin/base.html" %} 
+
+{% block title %}Register an account{% endblock %} 
+
+{% block content %} 
+    <h2>Register an account</h2>
+    <p>Please, use this form below to register your account</p>
+    <form method="POST" action="{% url 'listin:register' %}">
+        {{ form.as_p }} 
+        {%csrf_token%} 
+        <p><input type="submit" value="Register account"  class="save btn btn-success"></p>
+    </form>
+{% endblock %}
