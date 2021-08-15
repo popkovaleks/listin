@@ -1,13 +1,16 @@
 from django.http import request
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.contrib.auth import authenticate, login
+
+import pdb
 
 
 
 
 from .models import Book
-from .forms import AuthorForm, BookForm, RegistrationForm
+from .forms import AuthorForm, BookForm, RegistrationForm, LoginForm
 # Create your views here.
 
 
@@ -44,8 +47,24 @@ def new_author(request):
         form = AuthorForm()
     return render(request, 'listin/new_author.html', {'form': form})
 
-def login(request):
-    form = LoginForm()
+def login_user(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(username=cd['username'], password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('listin:index'))
+                else:
+                    return HttpResponse('Account is disabled')
+            else:
+                return HttpResponse('No such account')
+    else:
+        form = LoginForm()
+    return render(request, 'listin/login.html', {'form': form})
+    
 
 
 def register(request):

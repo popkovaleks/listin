@@ -1,0 +1,10 @@
+{% extends "listin/base.html" %} 
+
+{% block content %} 
+<h2>Log in</h2>
+<form method="POST" action="{% url 'listin:login_user' %}">
+    {{ form.as_p }} 
+    {%csrf_token%} 
+    <p><input type="submit" value="Log in"  class="save btn btn-success"></p>
+</form>
+{% endblock %}
