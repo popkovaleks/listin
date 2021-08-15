@@ -1,0 +1,6 @@
+{% extends 'listin/base.html' %} 
+
+{% block content %} 
+<p>Hello, {{ new_user.username }}! You are registered now!</p>
+<a href="{% url 'listin:index' %}">Home page</a>
+{% endblock %}
