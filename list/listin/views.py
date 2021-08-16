@@ -2,7 +2,7 @@ from django.http import request
 from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 import pdb
 
@@ -65,7 +65,9 @@ def login_user(request):
         form = LoginForm()
     return render(request, 'listin/login.html', {'form': form})
     
-
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('listin:index'))
 
 def register(request):
     if request.method == 'POST':
