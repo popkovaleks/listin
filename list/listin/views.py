@@ -9,7 +9,7 @@ import pdb
 
 
 
-from .models import Book
+from .models import Book, Post
 from .forms import AuthorForm, BookForm, RegistrationForm, LoginForm
 # Create your views here.
 
@@ -19,6 +19,9 @@ def index(request):
     context = {'books': books}
     return render(request, 'listin/index.html', context)
 
+def my_posts(request):
+    posts = Post.objects.filter(author=request.user.id)
+    return render(request, 'listin/my_posts.html', {'posts': posts})
 
 def book_detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
