@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 
-from .models import Book, Author, Genre
+from .models import Book, Author, Genre, Post
 
 class BookForm(forms.ModelForm):
 
@@ -31,12 +31,26 @@ class RegistrationForm(forms.ModelForm):
         model = User
         fields = ('username', 'first_name', 'email')
 
-    def clean_password2(self):
+    def clean_confirm_password(self):
         cd = self.cleaned_data
         if cd['password'] != cd['confirm_password']:
-            raise forms.ValidationError('Passwords don\'t match.')
+            raise forms.ValidationError('Passwords don\'t match. Please check it')
         return cd['confirm_password']
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Username')
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
+
+class PostForm(forms.ModelForm):
+    book = forms.ModelChoiceField(queryset=Book.objects.all(), widget=forms.TextInput)
+    class Meta:
+        model = Post
+        fields = ('title', 'book', 'content', 'invisible')
+
+    def clean_book(self):
+        cd = self.cleaned_data
+        print(cd['book'])
+        print(Book.objects.get(name=cd['book']))
+        if not Book.objects.get(name=cd['book']):
+            raise forms.ValidationError('This book does not exists. Please add it')
+        return cd['book']

@@ -20,6 +20,7 @@
                     <div>
                         {% if request.user.is_authenticated %} 
                             {{ request.user.username}} | <a href="{% url 'listin:logout_user' %}">Logout</a>
+                            | <a href="{% url 'listin:my_posts' %}">My posts</a>
                         {% else %} 
                             <a href="{% url 'listin:register' %}">Registration</a>|<a href="{% url 'listin:login_user' %}">Login</a>
                         {% endif %}

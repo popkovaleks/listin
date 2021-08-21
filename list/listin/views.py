@@ -10,7 +10,7 @@ import pdb
 
 
 from .models import Book, Post
-from .forms import AuthorForm, BookForm, RegistrationForm, LoginForm
+from .forms import AuthorForm, BookForm, RegistrationForm, LoginForm, PostForm
 # Create your views here.
 
 
@@ -22,6 +22,27 @@ def index(request):
 def my_posts(request):
     posts = Post.objects.filter(author=request.user.id)
     return render(request, 'listin/my_posts.html', {'posts': posts})
+
+def new_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        print('post request')
+        # try:
+        #     Book.objects.get(name=form['book'].value())
+        # except (Book.DoesNotExist):
+        #     # form = PostForm()
+        #     return render(request, 'listin/new_post.html', {'form': form, 'error_message': "This book does not exist on our site. Please, add it"})
+        if form.is_valid():
+            print('form is valid')
+            form.instance.author = request.user
+            post = form.save(commit=False)
+            post.save()
+            return HttpResponseRedirect(reverse('listin:my_posts'))
+        
+    else:
+        print('else')
+        form = PostForm()
+    return render(request, 'listin/new_post.html', {'form': form})
 
 def book_detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
