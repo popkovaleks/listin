@@ -1,13 +1,11 @@
 {% extends "listin/base.html" %} 
 {% block content %}
-    <a href="{% url 'listin:new_book' %}" class="btn btn-info">+ New book</a>
-    <a href="{% url 'listin:new_author' %}" class="btn btn-info">+ New author</a>
+
     <br>
-    <br>
-    {% if books %} 
+    {% if posts %} 
         <ul class="list-group list-group-flush">
-            {% for book in books %} 
-                <li class="list-group-item"><a href="{% url 'listin:book_detail' book.id %}">{{book.name}}</a> Author: {{book.author}}</li>
+            {% for post in posts %} 
+                <li class="list-group-item"><a href="{% url 'listin:post' post.id %}">{{post.title}}</a> Author: {{post.author}}</li>
             {% endfor %}
         </ul>
     {% endif %}

@@ -15,7 +15,7 @@ class BooksLookup(LookupChannel):
 
     def format_match(self, item):
         return "<span class='book'>{} - {}</span>".format(item.name, item.author)
-        
+
     def check_auth(self, request):
         if request.user.is_authenticated:
             return True 

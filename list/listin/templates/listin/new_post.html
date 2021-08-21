@@ -6,6 +6,7 @@
 <form method="POST" action="{%url 'listin:new_post' %}">
     {%csrf_token%} 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {{ form.media }}
     <p>Title {{ form.title }}  </p><br>
     <p>Book {{ form.book }} <a href="{% url 'listin:new_book' %}"  target="_blank">+ book</a> </p><br>
     <p>Content {{form.content}}</p> <br>

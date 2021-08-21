@@ -15,8 +15,8 @@ from .forms import AuthorForm, BookForm, RegistrationForm, LoginForm, PostForm
 
 
 def index(request):
-    books = Book.objects.order_by('author')
-    context = {'books': books}
+    posts = Post.objects.filter(invisible=False).order_by('published_date')
+    context = {'posts': posts}
     return render(request, 'listin/index.html', context)
 
 def my_posts(request):
@@ -48,6 +48,11 @@ def new_post(request):
         print('else')
         form = PostForm()
     return render(request, 'listin/new_post.html', {'form': form})
+
+def all_books(request):
+    books = Book.objects.order_by('author')
+    context = {'books': books}
+    return render(request, 'listin/all_books.html', context)
 
 def book_detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
