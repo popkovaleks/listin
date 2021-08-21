@@ -9,8 +9,11 @@ urlpatterns = [
     path('<int:book_id>', views.book_detail, name='book_detail'),
     path('new_book/', views.new_book, name='new_book'),
     path('new_author/', views.new_author, name='new_author'),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('login/', views.login, name='login'),
+    path('login/', views.login_user, name='login_user'),
     path('register/', views.register, name='register'),
     path('register_done/', views.register, name='register'),
+    path('logout/', views.logout_user, name='logout_user'),
+    path('my_posts/', views.my_posts, name='my_posts'),
+    path('new_post/', views.new_post, name='new_post'),
+    path('my_posts/<int:post_id>/', views.post, name='post')
 ]
