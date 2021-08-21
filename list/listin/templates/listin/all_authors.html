@@ -1,0 +1,16 @@
+{% extends "listin/base.html" %} 
+
+{% block content %} 
+    <h2>Authors</h2>
+    
+    <a href="{% url 'listin:new_author' %}" class="btn btn-info">+ New author</a>
+    <br>
+    <br>
+    {% if authors %} 
+        <ul class="list-group list-group-flush">
+            {% for author in authors %} 
+                <li class="list-group-item"><a href="#">{{author.first_name}} {{author.last_name}}</a> </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

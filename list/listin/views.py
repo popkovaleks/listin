@@ -9,7 +9,7 @@ import pdb
 
 
 
-from .models import Book, Post
+from .models import Book, Post, Author
 from .forms import AuthorForm, BookForm, RegistrationForm, LoginForm, PostForm
 # Create your views here.
 
@@ -19,6 +19,7 @@ def index(request):
     context = {'posts': posts}
     return render(request, 'listin/index.html', context)
 
+#Posts
 def my_posts(request):
     posts = Post.objects.filter(author=request.user.id)
     return render(request, 'listin/my_posts.html', {'posts': posts})
@@ -49,6 +50,8 @@ def new_post(request):
         form = PostForm()
     return render(request, 'listin/new_post.html', {'form': form})
 
+
+#Books
 def all_books(request):
     books = Book.objects.order_by('author')
     context = {'books': books}
@@ -70,6 +73,12 @@ def new_book(request):
         form = BookForm()
     return render(request, 'listin/new_book.html', {'form': form})
 
+#Authors
+
+def all_authors(request):
+    authors = Author.objects.all()
+    return render(request, 'listin/all_authors.html', {'authors': authors})
+
 def new_author(request):
     if request.method == 'POST':
         form = AuthorForm(request.POST)
@@ -81,6 +90,8 @@ def new_author(request):
         form = AuthorForm()
     return render(request, 'listin/new_author.html', {'form': form})
 
+
+#Users
 def login_user(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
