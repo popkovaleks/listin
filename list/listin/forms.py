@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from ajax_select.fields import AutoCompleteSelectField
 
 
 from .models import Book, Author, Genre, Post
@@ -42,10 +43,12 @@ class LoginForm(forms.Form):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
 class PostForm(forms.ModelForm):
-    book = forms.ModelChoiceField(queryset=Book.objects.all(), widget=forms.TextInput)
+    # book = forms.ModelChoiceField(queryset=Book.objects.all(), widget=forms.TextInput)
     class Meta:
         model = Post
         fields = ('title', 'book', 'content', 'invisible')
+
+    book = AutoCompleteSelectField('books', required=True)
 
     def clean_book(self):
         cd = self.cleaned_data

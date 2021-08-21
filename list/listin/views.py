@@ -23,6 +23,11 @@ def my_posts(request):
     posts = Post.objects.filter(author=request.user.id)
     return render(request, 'listin/my_posts.html', {'posts': posts})
 
+def post(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    return render(request, 'listin/post.html', {'post': post})
+
+    
 def new_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)

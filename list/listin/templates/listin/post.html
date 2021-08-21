@@ -1,0 +1,9 @@
+{% extends "listin/base.html" %} 
+
+{% block content %} 
+    <h2>{{post.title}}</h2>
+    <p>{{post.author}}</p>
+    <br/>
+    <h3>{{post.book.name}} - {{post.book.author}}</h3>
+    <p>{{post.content}}</p>
+{% endblock %}
