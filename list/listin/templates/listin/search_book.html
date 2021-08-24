@@ -1,16 +1,17 @@
 {% extends "listin/base.html" %} 
 {% block content %}
-    <a href="{% url 'listin:new_book' %}" class="btn btn-info">+ New book</a>
     <form action="{% url 'listin:search_book' %}" method="get">
         <input name='book_name' type='text' placeholder="Search book...">
     </form>
     <br>
     <br>
-    {% if books %} 
+    {% if books_list %} 
         <ul class="list-group list-group-flush">
-            {% for book in books %} 
+            {% for book in books_list %} 
                 <li class="list-group-item"><a href="{% url 'listin:book_detail' book.id %}">{{book.name}}</a> Author: {{book.author}}</li>
             {% endfor %}
         </ul>
+    {% else %} 
+        <p>No book has been found</p>
     {% endif %}
 {% endblock %}

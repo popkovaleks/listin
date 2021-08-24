@@ -11,6 +11,7 @@ import pdb
 
 from .models import Book, Post, Author
 from .forms import AuthorForm, BookForm, RegistrationForm, LoginForm, PostForm
+
 # Create your views here.
 
 
@@ -72,6 +73,14 @@ def new_book(request):
     else:
         form = BookForm()
     return render(request, 'listin/new_book.html', {'form': form})
+
+
+def search_book(request):
+    books_list = Book.objects.filter(name__icontains=request.GET['book_name'])
+    if books_list is not None:
+        return render(request, 'listin/search_book.html', {'books_list': books_list})
+    else:
+        return render(request, 'listin/search_book.html')
 
 #Authors
 
