@@ -3,6 +3,7 @@ from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 
 import pdb
 
@@ -98,6 +99,26 @@ def new_author(request):
     else:
         form = AuthorForm()
     return render(request, 'listin/new_author.html', {'form': form})
+
+def search_author(request):
+    name_list = request.GET['author_name'].split()
+    try:
+        if len(name_list) == 1:
+            name1 = name_list[0]
+            authors_list = Author.objects.filter(Q(first_name__icontains=name1)|\
+                Q(last_name__icontains=name1))
+        else:
+            name1, name2 = name_list[0], name_list[1]
+        
+            authors_list = Author.objects.filter(Q(first_name__icontains=name1, last_name__icontains=name2)|\
+                Q(first_name__icontains=name2, last_name__icontains=name1))
+        
+        if authors_list is not None:
+            return render(request, 'listin/search_author.html', {'authors_list': authors_list})
+        else:
+            return render(request, 'listin/search_author.html')
+    except:
+        return render(request, 'listin/search_author.html')
 
 
 #Users

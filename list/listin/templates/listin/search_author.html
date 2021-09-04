@@ -1,0 +1,18 @@
+{% extends 'listin/base.html' %} 
+
+{% block content %} 
+<form action="{% url 'listin:search_author' %}" method="get">
+    <input name='author_name' type='text' placeholder="Search author...">
+</form>
+<br>
+<br>
+{% if authors_list %} 
+    <ul class="list-group list-group-flush">
+        {% for author in authors_list %} 
+            <li class="list-group-item"><a href="#">{{author.first_name}} {{author.last_name}}</a></li>
+        {% endfor %}
+    </ul>
+{% else %} 
+    <p>No author has been found</p>
+{% endif %}
+{% endblock %}

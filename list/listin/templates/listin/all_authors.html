@@ -2,7 +2,10 @@
 
 {% block content %} 
     <h2>Authors</h2>
-    
+    <form action="{% url 'listin:search_author' %}" method="get">
+        <input name='author_name' type='text' placeholder="Search author...">
+    </form>
+    <br>
     <a href="{% url 'listin:new_author' %}" class="btn btn-info">+ New author</a>
     <br>
     <br>

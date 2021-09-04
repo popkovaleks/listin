@@ -19,4 +19,5 @@ urlpatterns = [
     path('all_books/', views.all_books, name='all_books'),
     path('all_authors/', views.all_authors, name='all_authors'),
     path('search_book/', views.search_book, name='search_book'),
+    path('search_author/', views.search_author, name='search_author')
 ]
